@@ -1,13 +1,23 @@
 
-const yargs = require("yargs");
+const yargs = require( "yargs" );
+const Movie = require("./movie/movie.model");
+const Actor = require( "./movie/actor.model" );
 const {createMovie,readMovies,updateMovie,deleteMovie,} = require("./movie/movie.method");
 const { addActor } = require( "./movie/actor.method" );
 
 
 const app = async () => {
+
+    await Actor.sync();
+    await Movie.sync();
+    Actor.hasMany(Movie, { foreignKey: 'actorId' });
+    Movie.belongsTo(Actor, {
+        foreignKey: 'actorId',
+    });
+
     switch ( process.argv[2] ) {
         case 'create': {
-            createMovie( { title: yargs.argv.title, actor: yargs.argv.actor } );
+            createMovie( { title: yargs.argv.title, actorId: yargs.argv.actorId } );
         }
             break;
         case 'read': {

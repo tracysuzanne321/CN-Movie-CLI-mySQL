@@ -4,8 +4,7 @@ const { DataTypes } = require("sequelize");
 
 
 const Actor = sequelize.define("Actor", {
-  
-  id: {
+  actorId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,

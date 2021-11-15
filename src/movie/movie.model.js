@@ -1,5 +1,6 @@
 const sequelize = require("../db/connection");
 const { DataTypes } = require("sequelize");
+const Actor = require( "./actor.model" );
 
 const Movie = sequelize.define("Movie", {
   
@@ -12,11 +13,12 @@ const Movie = sequelize.define("Movie", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  actor: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    
+  actorId: {
+    type: DataTypes.INTEGER,
+    references: { model: 'Actors', key: 'actorId' },
   },
 });
+
+
 
 module.exports = Movie;
